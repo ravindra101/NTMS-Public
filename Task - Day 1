@@ -2,3 +2,6 @@
 New-Item -path "c:\" -name Demo -ItemType directory
 New-Item -Path "C:\Demo\" -name Test.txt -ItemType file
 Get-ChildItem -path C:\Users\user-name\AppData\Local\Temp
+# To see and set registery value
+Set-ItemProperty -Path HKCU:\software\microsoft\windows\currentversion\explorer\advanced\ -name DontPrettyPath -value 1
+Get-ItemProperty -Path HKCU:\software\microsoft\windows\currentversion\explorer\advanced\ -name DontPrettyPath
