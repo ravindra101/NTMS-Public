@@ -1,0 +1,4 @@
+# This script for directory actvity.
+New-Item -path "c:\" -name Demo -ItemType directory
+New-Item -Path "C:\Demo\" -name Test.txt -ItemType file
+Get-ChildItem -path C:\Users\user-name\AppData\Local\Temp
