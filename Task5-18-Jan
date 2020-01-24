@@ -1,0 +1,33 @@
+function comp-details
+
+{
+[cmdletbinding()]
+param (
+[parameter(mandatory=$true,position=0,valuefrompipeline=$True)][Alias('$ComputerName')] ${computerName[localhost]}, [parameter(mandatory=$true,position=0,valuefrompipeline=$True)][Alias('$Drive')] ${Filter[drivetype=3]}
+)
+
+Begin {
+$computerName =
+if (${ComputerName[localhost]}) {
+    ${ComputerName[localhost]}
+    } else {
+        'localhost'
+        }
+$Drive =
+if (${Drive[drivetype=3]}) {
+    ${Drive[drivetype=3]}
+    } else {
+        'drivetype=3'
+        }
+}
+Process {
+
+Get-WmiObject win32_logicaldisk -ComputerName $Computername -Filter $Drive | where {($_.FreeSpace /$_.size) -lt 1} | select DeviceID,@{Name="FreeSpace"; Expression={$_.FreeSpace/1GB}},@{Name="Size"; Expression={$_.Size/1GB}} |Export-csv -path "D:\details.csv"
+}
+
+
+}
+
+
+
+comp-details
